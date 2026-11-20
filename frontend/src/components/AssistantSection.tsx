@@ -21,8 +21,8 @@ export const AssistantSection: React.FC<AssistantSectionProps> = ({
   lang,
   districtName,
 }) => {
-  const t = translations[lang];
-  const isHi = lang === 'hi';
+  const t = translations[lang] || translations.hi;
+  const isHi = lang === 'hi' || lang === 'bho' || lang === 'mai';
 
   const [inputMessage, setInputMessage] = useState('');
   const [loading, setLoading] = useState(false);

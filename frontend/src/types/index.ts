@@ -248,3 +248,52 @@ export interface DataSourceInfo {
   rate_limit: string;
   last_verified: string;
 }
+
+export interface SupportedLanguage {
+  code: string;
+  name: string;
+  english_name: string;
+  region: string;
+  is_default: boolean;
+}
+
+export interface FarmerPreferenceInput {
+  farmer_id?: number;
+  name?: string;
+  preferred_language: string;
+  district_id?: number;
+}
+
+export interface FarmerPreferenceResponse {
+  farmer_id?: number;
+  preferred_language: string;
+  district_id?: number;
+  supported_languages: SupportedLanguage[];
+  message: string;
+}
+
+export interface ApiKeyItemStatus {
+  name: string;
+  is_configured: boolean;
+  masked_key?: string | null;
+  provider_details: string;
+  docs_url: string;
+}
+
+export interface AllApiKeysStatusResponse {
+  gemini: ApiKeyItemStatus;
+  groq: ApiKeyItemStatus;
+  weather: ApiKeyItemStatus;
+  active_ai_provider: string;
+  active_weather_provider: string;
+  message: string;
+}
+
+export interface SaveApiKeysInput {
+  gemini_api_key?: string;
+  groq_api_key?: string;
+  weather_api_key?: string;
+  openweather_api_key?: string;
+  weatherapi_key?: string;
+}
+

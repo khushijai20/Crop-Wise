@@ -4,7 +4,9 @@ import {
   SoilData, SoilTestReportInput,
   Crop, RecommendationRequest, RecommendationResponse,
   CalendarRequest, CalendarResponse,
-  ChatRequest, ChatResponse, DataSourceInfo
+  ChatRequest, ChatResponse, DataSourceInfo,
+  FarmerPreferenceInput, FarmerPreferenceResponse,
+  AllApiKeysStatusResponse, SaveApiKeysInput
 } from '@/types';
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api/v1';
@@ -79,6 +81,23 @@ export const api = {
     fetchJson<ChatResponse>('/assistant/chat', {
       method: 'POST',
       body: JSON.stringify(req),
+    }),
+
+  // Farmer Language & District Preferences
+  getPreferences: (farmerId?: number) =>
+    fetchJson<FarmerPreferenceResponse>(`/farmer/preferences${farmerId ? `?farmer_id=${farmerId}` : ''}`),
+  updatePreferences: (data: FarmerPreferenceInput) =>
+    fetchJson<FarmerPreferenceResponse>('/farmer/preferences', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  // API Keys (Groq, Gemini, Weather App)
+  getApiKeysStatus: () => fetchJson<AllApiKeysStatusResponse>('/api-keys/status'),
+  saveApiKeys: (data: SaveApiKeysInput) =>
+    fetchJson<AllApiKeysStatusResponse>('/api-keys/save', {
+      method: 'POST',
+      body: JSON.stringify(data),
     }),
 
   // Data Sources & Health

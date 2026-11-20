@@ -27,8 +27,29 @@ import {
 export default function Home() {
   const [lang, setLang] = useState<Language>('hi');
   const [currentTab, setCurrentTab] = useState<string>('home');
-  const t = translations[lang];
+  const t = translations[lang] || translations.hi;
   const isHi = lang === 'hi';
+
+  // Load language preference from localStorage
+  useEffect(() => {
+    try {
+      const savedLang = localStorage.getItem('smart_kisan_lang') as Language;
+      if (savedLang && ['hi', 'en', 'bho', 'mai'].includes(savedLang)) {
+        setLang(savedLang);
+      }
+    } catch (_) {}
+  }, []);
+
+  const handleSetLang = (newLang: Language) => {
+    setLang(newLang);
+    try {
+      localStorage.setItem('smart_kisan_lang', newLang);
+      api.updatePreferences({
+        preferred_language: newLang,
+        district_id: selectedDistrict?.id || 26
+      }).catch(() => {});
+    } catch (_) {}
+  };
 
   // Location State
   const [states, setStates] = useState<State[]>([]);
@@ -219,9 +240,12 @@ export default function Home() {
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
         lang={lang}
-        setLang={setLang}
+        setLang={handleSetLang}
         selectedDistrict={selectedDistrict}
         onOpenLocationModal={() => setIsLocationModalOpen(true)}
+        onRefreshData={() => {
+          if (selectedDistrict) loadDistrictData(selectedDistrict.id);
+        }}
       />
 
       {/* Main Content Area */}

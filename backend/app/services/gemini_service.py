@@ -56,10 +56,24 @@ class GeminiAssistantService:
             )
         ]
 
-        # 2. Check if Gemini API Key is available
+        # 2. Check AI Model Providers (Groq & Gemini)
+        groq_api_key = settings.GROQ_API_KEY or os.environ.get("GROQ_API_KEY", "")
+        if settings.AI_PROVIDER == "groq" and groq_api_key:
+            from app.services.groq_service import GroqAssistantService
+            groq_res = await GroqAssistantService.get_response(request, db)
+            if groq_res:
+                return groq_res
+
         api_key = settings.GEMINI_API_KEY or os.environ.get("GEMINI_API_KEY", "")
 
         if not api_key:
+            # If Gemini is not set but Groq is available, use Groq seamlessly
+            if groq_api_key:
+                from app.services.groq_service import GroqAssistantService
+                groq_res = await GroqAssistantService.get_response(request, db)
+                if groq_res:
+                    return groq_res
+
             # High-quality database-backed fallback response
             return cls._build_fallback_response(request, district_name, soil_summary, matched_crops, matched_advisories, sources)
 
@@ -85,7 +99,14 @@ DATABASE RETRIEVED KNOWLEDGE:
             if matched_advisories:
                 rag_context += "\nVerified Advisories:\n" + "\n".join([f"- {a.title}: {a.advisory_en} / {a.advisory_hi}" for a in matched_advisories[:3]])
 
-            prompt = f"{SYSTEM_PROMPT}\n\n{rag_context}\n\nPlease respond directly to the farmer in {'Hindi (हिंदी)' if request.language == 'hi' else 'English'}."
+            lang_instruction = {
+                "hi": "Hindi (सरल और सम्मानजनक ग्रामीण हिंदी)",
+                "en": "English (Practical Agricultural English)",
+                "bho": "Bhojpuri (विनम्र आ आदरपूर्वक देहाती भोजपुरी)",
+                "mai": "Maithili (मिथिला क्षेत्रक विनम्र आ शुद्ध मैथिली)",
+            }.get(request.language or "hi", "Hindi (हिंदी)")
+
+            prompt = f"{SYSTEM_PROMPT}\n\n{rag_context}\n\nPlease respond directly to the farmer in {lang_instruction}."
 
             response = client.models.generate_content(
                 model="gemini-2.5-flash",
@@ -98,11 +119,16 @@ DATABASE RETRIEVED KNOWLEDGE:
                 language=request.language or "hi",
                 sources=sources,
                 is_gemini_active=True,
-                status_message=None
+                status_message="✨ Powered by Google Gemini 2.5 Flash"
             )
 
         except Exception as e:
-            logger.error("Gemini API call failed: %s. Returning database fallback.", str(e))
+            logger.error("Gemini API call failed: %s. Attempting Groq or database fallback.", str(e))
+            if groq_api_key:
+                from app.services.groq_service import GroqAssistantService
+                groq_res = await GroqAssistantService.get_response(request, db)
+                if groq_res:
+                    return groq_res
             return cls._build_fallback_response(request, district_name, soil_summary, matched_crops, matched_advisories, sources, error_msg=str(e))
 
     @classmethod
@@ -111,10 +137,44 @@ DATABASE RETRIEVED KNOWLEDGE:
         matched_crops: List[Any], matched_advisories: List[Any], sources: List[SourceCitation],
         error_msg: Optional[str] = None
     ) -> ChatResponse:
-        is_hi = (request.language == "hi")
+        lang = request.language or "hi"
         msg = request.message.lower()
 
-        if is_hi:
+        if lang == "bho":
+            answer = f"**प्रणाम किसान भाई! (स्मार्ट किसान सहायक - भोजपुरी)**\n\n"
+            answer += f"रउआ के जिला **{district_name}** के कृषि रिकॉर्ड के अनुसार:\n"
+            answer += f"• **माटी के स्थिति**: {soil_summary}\n\n"
+            if "गेहूं" in msg or "wheat" in msg:
+                answer += "🌾 **गेहूं के खेती खातिर मुख्य सलाह:**\n"
+                answer += "- बोआई के सबले नीक समय 15 नवंबर से 10 दिसंबर तक बा।\n"
+                answer += "- बिहार खातिर बढ़िया बीया: **DBW 187**, **HD 2967**, **सबौर निर्जल**।\n"
+                answer += "- बोआई के 20-25 दिन बाद **सीआरआई (CRI)** अवस्था में पहिला पानी पटावल बहुत जरूरी बा।\n"
+            elif "धान" in msg or "rice" in msg or "चावल" in msg:
+                answer += "🌾 **धान के खेती खातिर सलाह:**\n"
+                answer += "- पानी लागे वाला खेत खातिर **स्वर्णा सब-1** आ सामान्य खेत खातिर **राजेंद्र श्वेता** चुनीं।\n"
+            else:
+                answer += "💡 **खेती के जरूरी सलाह:**\n"
+                answer += "- संतुलित खाद आ सही समय पर पानी पटावे से पैदावार नीक होखेला।\n"
+                answer += "- कवनो रोग या कीड़ा के संदेह भइला पर नजदीकी KVK से संपर्क करीं।\n"
+            status_note = "ℹ️ *ई उत्तर स्थानीय ICAR/BAU डेटाबेस से दिहल गइल बा। AI जनरेटिव सलाह खातिर GEMINI_API_KEY या GROQ_API_KEY जोड़ीं।*"
+        elif lang == "mai":
+            answer = f"**प्रणाम किसान भाई! (स्मार्ट किसान सहायक - मैथिली)**\n\n"
+            answer += f"अहांक जिला **{district_name}** क कृषि रिकॉर्डक अनुसार:\n"
+            answer += f"• **माटिक स्थिति**: {soil_summary}\n\n"
+            if "गेहूं" in msg or "wheat" in msg:
+                answer += "🌾 **गहुम (गेहूं) क खेती लेल सलाह:**\n"
+                answer += "- बोआईक उपयुक्त समय 15 नवंबर सँ 10 दिसंबर धरि अछि।\n"
+                answer += "- उन्नत बीया: **DBW 187**, **HD 2967**, **सबौर निर्जल**।\n"
+                answer += "- बोआईक 20-25 दिन बाद पहिल पटौनी (CRI अवस्था) अत्यंत आवश्यक अछि।\n"
+            elif "धान" in msg or "rice" in msg or "चावल" in msg:
+                answer += "🌾 **धान क खेती लेल सलाह:**\n"
+                answer += "- जलमग्न खेतक लेल **स्वर्णा सब-1** आ सिंचित लेल **राजेंद्र श्वेता** लगाउ।\n"
+            else:
+                answer += "💡 **खेतीक महत्वपूर्ण दिशानिर्देश:**\n"
+                answer += "- संतुलित खाद ओ समय पर पटौनी सं बढ़िया पैदावार भेटैत अछि।\n"
+                answer += "- विशिष्ट रोग निवारण लेल स्थानीय KVK वैज्ञानिक सं संपर्क करू।\n"
+            status_note = "ℹ️ *ई उत्तर स्थानीय ICAR/BAU डेटाबेस सँ प्राप्त अछि। AI संवाद लेल GEMINI_API_KEY अथवा GROQ_API_KEY जोड़ू।*"
+        elif lang == "hi":
             answer = f"**नमस्ते किसान भाई! (स्मार्ट किसान सहायक)**\n\n"
             answer += f"आपके जिले **{district_name}** के कृषि रिकॉर्ड के अनुसार:\n"
             answer += f"• **मिट्टी की स्थिति**: {soil_summary}\n\n"

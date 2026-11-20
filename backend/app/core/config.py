@@ -9,8 +9,19 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = os.getenv("DATABASE_URL", "sqlite:///./smart_kisan.db")
     
-    # External APIs
+    # External AI APIs (Gemini & Groq)
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+    GROQ_API_KEY: str = os.getenv("GROQ_API_KEY", "")
+    GROQ_MODEL: str = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+    AI_PROVIDER: str = os.getenv("AI_PROVIDER", "auto") # "gemini", "groq", "auto"
+
+    # External Weather App APIs
+    WEATHER_API_KEY: str = os.getenv("WEATHER_API_KEY", "")
+    OPENWEATHER_API_KEY: str = os.getenv("OPENWEATHER_API_KEY", "")
+    WEATHERAPI_KEY: str = os.getenv("WEATHERAPI_KEY", "")
+    WEATHER_PROVIDER: str = os.getenv("WEATHER_PROVIDER", "auto") # "open_meteo", "weatherapi", "openweather", "auto"
+
+    # Weather & Government APIs
     IMD_API_KEY: str = os.getenv("IMD_API_KEY", "")
     IMD_API_BASE_URL: str = os.getenv("IMD_API_BASE_URL", "https://api.imd.gov.in/public")
     OPEN_METEO_BASE_URL: str = os.getenv("OPEN_METEO_BASE_URL", "https://api.open-meteo.com/v1")

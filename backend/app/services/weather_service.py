@@ -58,6 +58,22 @@ class WeatherService:
                 cached_data.data_status_label = "Cached Regional Data"
                 return cached_data
 
+        # 1. Check Commercial Weather App API Key (WeatherAPI.com or OpenWeatherMap)
+        weatherapi_k = settings.WEATHERAPI_KEY or settings.WEATHER_API_KEY
+        if weatherapi_k and len(weatherapi_k) > 15:
+            api_res = await cls._fetch_from_weatherapi(district_id, district_name, latitude, longitude, weatherapi_k)
+            if api_res:
+                _WEATHER_CACHE[cache_key] = (now, api_res)
+                return api_res
+
+        openweather_k = settings.OPENWEATHER_API_KEY or settings.WEATHER_API_KEY
+        if openweather_k and len(openweather_k) >= 30:
+            owm_res = await cls._fetch_from_openweather(district_id, district_name, latitude, longitude, openweather_k)
+            if owm_res:
+                _WEATHER_CACHE[cache_key] = (now, owm_res)
+                return owm_res
+
+        # 2. Open-Meteo High-Resolution Free Weather Model (Official open scientific API)
         url = f"{settings.OPEN_METEO_BASE_URL}/forecast"
         params = {
             "latitude": latitude,
@@ -267,3 +283,141 @@ class WeatherService:
             points=pts,
             source="Regional Historical Estimates (Fallback)"
         )
+
+    @classmethod
+    async def _fetch_from_weatherapi(
+        cls, district_id: int, district_name: str, latitude: float, longitude: float, api_key: str
+    ) -> Optional[WeatherForecastResponse]:
+        url = f"https://api.weatherapi.com/v1/forecast.json?key={api_key}&q={latitude},{longitude}&days=7&aqi=no&alerts=no"
+        try:
+            async with httpx.AsyncClient(timeout=5.0) as client:
+                res = await client.get(url)
+                if res.status_code == 200:
+                    data = res.json()
+                    curr = data.get("current", {})
+                    forecast_days = data.get("forecast", {}).get("forecastday", [])
+                    
+                    temp_c = float(curr.get("temp_c", 26.0))
+                    humidity = float(curr.get("humidity", 60.0))
+                    precip_mm = float(curr.get("precip_mm", 0.0))
+                    wind_kph = float(curr.get("wind_kph", 10.0))
+                    condition_text = curr.get("condition", {}).get("text", "Clear")
+
+                    current_obj = WeatherCurrent(
+                        temperature=temp_c,
+                        relative_humidity=humidity,
+                        precipitation=precip_mm,
+                        rain=precip_mm,
+                        weather_code=1,
+                        weather_description=condition_text,
+                        weather_description_hi=condition_text,
+                        wind_speed=round(wind_kph / 3.6, 1),
+                        data_source="WeatherAPI.com Live",
+                        is_live=True,
+                        recorded_at=curr.get("last_updated", time.strftime("%Y-%m-%dT%H:%M"))
+                    )
+
+                    daily_items: List[DailyForecastItem] = []
+                    for fd in forecast_days:
+                        date_str = fd.get("date", "")
+                        day = fd.get("day", {})
+                        daily_items.append(
+                            DailyForecastItem(
+                                date=date_str,
+                                temp_max=float(day.get("maxtemp_c", 30.0)),
+                                temp_min=float(day.get("mintemp_c", 18.0)),
+                                precipitation_sum=float(day.get("totalprecip_mm", 0.0)),
+                                precipitation_probability=float(day.get("daily_chance_of_rain", 10)),
+                                weather_code=1,
+                                weather_description=day.get("condition", {}).get("text", "Sunny"),
+                                weather_description_hi=day.get("condition", {}).get("text", "साफ़")
+                            )
+                        )
+
+                    return WeatherForecastResponse(
+                        district_id=district_id,
+                        district_name=district_name,
+                        latitude=latitude,
+                        longitude=longitude,
+                        current=current_obj,
+                        daily_forecast=daily_items,
+                        status="success",
+                        data_status_label="WeatherAPI Live Data",
+                        warning=None
+                    )
+        except Exception as e:
+            logger.warning("WeatherAPI fetch error: %s", str(e))
+        return None
+
+    @classmethod
+    async def _fetch_from_openweather(
+        cls, district_id: int, district_name: str, latitude: float, longitude: float, api_key: str
+    ) -> Optional[WeatherForecastResponse]:
+        url = f"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={api_key}&units=metric"
+        forecast_url = f"https://api.openweathermap.org/data/2.5/forecast?lat={latitude}&lon={longitude}&appid={api_key}&units=metric"
+        try:
+            async with httpx.AsyncClient(timeout=5.0) as client:
+                res = await client.get(url)
+                if res.status_code == 200:
+                    data = res.json()
+                    main = data.get("main", {})
+                    wind = data.get("wind", {})
+                    weather_list = data.get("weather", [{}])
+                    w_desc = weather_list[0].get("description", "clear sky").capitalize()
+
+                    current_obj = WeatherCurrent(
+                        temperature=float(main.get("temp", 26.0)),
+                        relative_humidity=float(main.get("humidity", 60.0)),
+                        precipitation=float(data.get("rain", {}).get("1h", 0.0)),
+                        rain=float(data.get("rain", {}).get("1h", 0.0)),
+                        weather_code=1,
+                        weather_description=w_desc,
+                        weather_description_hi=w_desc,
+                        wind_speed=float(wind.get("speed", 3.0)),
+                        data_source="OpenWeatherMap Live",
+                        is_live=True,
+                        recorded_at=time.strftime("%Y-%m-%dT%H:%M")
+                    )
+
+                    daily_items: List[DailyForecastItem] = []
+                    f_res = await client.get(forecast_url)
+                    if f_res.status_code == 200:
+                        fdata = f_res.json()
+                        by_date: Dict[str, list] = {}
+                        for entry in fdata.get("list", []):
+                            d = entry.get("dt_txt", "")[:10]
+                            if d not in by_date:
+                                by_date[d] = []
+                            by_date[d].append(entry)
+
+                        for d, entries in list(by_date.items())[:7]:
+                            temps = [float(e.get("main", {}).get("temp", 25.0)) for e in entries]
+                            rains = [float(e.get("rain", {}).get("3h", 0.0)) for e in entries]
+                            daily_items.append(
+                                DailyForecastItem(
+                                    date=d,
+                                    temp_max=max(temps),
+                                    temp_min=min(temps),
+                                    precipitation_sum=round(sum(rains), 1),
+                                    precipitation_probability=25.0 if sum(rains) > 0 else 5.0,
+                                    weather_code=1,
+                                    weather_description=entries[0].get("weather", [{}])[0].get("description", "Clear").capitalize(),
+                                    weather_description_hi=entries[0].get("weather", [{}])[0].get("description", "साफ़")
+                                )
+                            )
+
+                    return WeatherForecastResponse(
+                        district_id=district_id,
+                        district_name=district_name,
+                        latitude=latitude,
+                        longitude=longitude,
+                        current=current_obj,
+                        daily_forecast=daily_items,
+                        status="success",
+                        data_status_label="OpenWeatherMap Live Data",
+                        warning=None
+                    )
+        except Exception as e:
+            logger.warning("OpenWeatherMap fetch error: %s", str(e))
+        return None
+

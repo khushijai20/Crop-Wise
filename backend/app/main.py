@@ -8,7 +8,7 @@ from app.models.models import State
 from app.services.data_importer import seed_all
 from app.api.v1.endpoints import (
     locations, weather, soil, crops,
-    recommendations, calendar, assistant, admin
+    recommendations, calendar, assistant, admin, preferences
 )
 
 @asynccontextmanager
@@ -50,6 +50,7 @@ app.include_router(crops.router, prefix=settings.API_V1_STR, tags=["Crops"])
 app.include_router(recommendations.router, prefix=settings.API_V1_STR, tags=["Crop Recommendations"])
 app.include_router(calendar.router, prefix=settings.API_V1_STR, tags=["Crop Calendar & Harvest Estimation"])
 app.include_router(assistant.router, prefix=settings.API_V1_STR, tags=["AI Farming Assistant"])
+app.include_router(preferences.router, prefix=settings.API_V1_STR, tags=["Farmer Language Preferences"])
 app.include_router(admin.router, prefix=settings.API_V1_STR, tags=["Admin & Provenance"])
 
 @app.get("/")
