@@ -7,16 +7,17 @@ client = TestClient(app)
 def test_root():
     response = client.get("/")
     assert response.status_code == 200
-    assert response.json()["project"] == "Smart Kisan 🌱"
+    assert "Smart Kisan" in response.json()["project"]
+    assert "Bihar" in response.json()["coverage"]
 
 def test_locations_states_and_districts():
-    # 1. Fetch States
+    # 1. Fetch States (Dedicated Bihar)
     states_res = client.get("/api/v1/states")
     assert states_res.status_code == 200
     states = states_res.json()
-    assert len(states) >= 6
-    bihar = next((s for s in states if s["name"] == "Bihar"), None)
-    assert bihar is not None
+    assert len(states) == 1
+    bihar = states[0]
+    assert bihar["name"] == "Bihar"
 
     # 2. Fetch all 38 Bihar districts
     districts_res = client.get(f"/api/v1/districts/{bihar['id']}")

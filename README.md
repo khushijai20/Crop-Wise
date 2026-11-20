@@ -1,6 +1,6 @@
-# Smart Kisan 🌱
-### AI-Powered Smart Agriculture & Crop Recommendation Platform for India
-*Tagline: Right Crop. Right Season. Better Farming.*
+# Smart Kisan Bihar 🌱
+### AI-Powered Smart Agriculture & Crop Recommendation Platform for Bihar
+*Tagline: Right Crop. Right Season. Better Farming in Bihar.*
 
 [![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110%2B-009688.svg)](https://fastapi.tiangolo.com/)
@@ -13,7 +13,12 @@
 
 ## 1. Project Overview
 
-**Smart Kisan** is a comprehensive, production-ready full-stack AgriTech web platform engineered to empower Indian farmers—starting with **all 38 districts of Bihar** and architected for nationwide expansion.
+**Smart Kisan Bihar** is a dedicated, production-ready full-stack AgriTech web platform engineered exclusively for farmers across **all 38 districts of Bihar**.
+
+The platform is customized for Bihar's 3 distinct Agro-Climatic Zones:
+- **Zone I (North-West Alluvial Plains)**: West Champaran, East Champaran, Sheohar, Sitamarhi, Madhubani, Gopalganj, Siwan, Saran, Vaishali, Muzaffarpur, Darbhanga, Samastipur, Begusarai.
+- **Zone II (North-East Alluvial Plains)**: Supaul, Saharsa, Madhepura, Purnia, Kishanganj, Araria, Katihar, Khagaria.
+- **Zone III (South Bihar Alluvial Plains)**: Patna, Nalanda, Bhojpur, Buxar, Rohtas, Kaimur, Gaya, Jehanabad, Arwal, Aurangabad, Nawada, Sheikhpura, Lakhisarai, Jamui, Munger, Bhagalpur, Banka.
 
 Indian farmers often face substantial financial loss from planting crops misaligned with shifting climate patterns, depleted soil nutrients, or erratic seasonal onset. **Smart Kisan** solves this by fusing:
 1. **Live Weather & Microclimate Forecasts** (Open-Meteo API + IMD Framework).

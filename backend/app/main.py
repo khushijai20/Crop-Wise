@@ -25,8 +25,8 @@ async def lifespan(app: FastAPI):
     yield
 
 app = FastAPI(
-    title="Smart Kisan API 🌱",
-    description="AI-Powered Smart Agriculture & Crop Recommendation Platform for Indian Farmers (Focus: Bihar & Beyond)",
+    title="Smart Kisan Bihar 🌱",
+    description="AI-Powered Smart Agriculture & Crop Recommendation Platform dedicated for Bihar Farmers (All 38 Districts)",
     version="2.0.0",
     lifespan=lifespan,
     docs_url="/docs",
@@ -43,7 +43,7 @@ app.add_middleware(
 )
 
 # API Routers
-app.include_router(locations.router, prefix=settings.API_V1_STR, tags=["Locations"])
+app.include_router(locations.router, prefix=settings.API_V1_STR, tags=["Locations (Bihar)"])
 app.include_router(weather.router, prefix=settings.API_V1_STR, tags=["Weather"])
 app.include_router(soil.router, prefix=settings.API_V1_STR, tags=["Soil Health"])
 app.include_router(crops.router, prefix=settings.API_V1_STR, tags=["Crops"])
@@ -55,12 +55,12 @@ app.include_router(admin.router, prefix=settings.API_V1_STR, tags=["Admin & Prov
 @app.get("/")
 def root():
     return {
-        "project": "Smart Kisan 🌱",
+        "project": "Smart Kisan Bihar 🌱",
         "tagline": "Right Crop. Right Season. Better Farming.",
         "status": "active",
         "version": "2.0.0",
         "docs": "/docs",
-        "coverage": "Bihar (38 Districts) + National Multi-State Architecture"
+        "coverage": "Bihar (Exclusively All 38 Districts)"
     }
 
 if __name__ == "__main__":

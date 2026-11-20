@@ -35,13 +35,13 @@ export const DistrictMap: React.FC<DistrictMapProps> = ({
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
       });
 
-      const lat = district ? district.latitude : 25.5941;
-      const lon = district ? district.longitude : 85.1376;
+      const lat = district ? district.latitude : 25.65;
+      const lon = district ? district.longitude : 85.75;
 
       if (!mapInstanceRef.current) {
         const map = L.map(mapContainerRef.current, {
           center: [lat, lon],
-          zoom: 8,
+          zoom: 7.5,
           scrollWheelZoom: false,
         });
 

@@ -585,10 +585,7 @@ export default function Home() {
       <LocationPicker
         isOpen={isLocationModalOpen}
         onClose={() => setIsLocationModalOpen(false)}
-        states={states}
         districts={districts}
-        selectedStateId={selectedStateId}
-        onSelectState={setSelectedStateId}
         selectedDistrict={selectedDistrict}
         onSelectDistrict={(d) => {
           setSelectedDistrict(d);
@@ -601,13 +598,13 @@ export default function Home() {
       <footer className="mt-16 border-t border-kisan-100 bg-white/80 py-8 text-center text-xs text-gray-500">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
           <p className="font-semibold text-kisan-900">
-            Smart Kisan 🌱 – {t.tagline}
+            Smart Kisan Bihar 🌱 – {t.tagline}
           </p>
           <p className="text-[11px] text-gray-400">
-            Powered by Open-Meteo API • ISRIC SoilGrids • ICAR & BAU Sabour Agronomy • Google Gemini AI
+            Powered by Open-Meteo API • ISRIC SoilGrids • ICAR-RCER Patna & BAU Sabour Agronomy • Google Gemini AI
           </p>
-          <p className="text-[10px] text-gray-400">
-            Designed for Indian Farmers with primary focus on Bihar (38 Districts)
+          <p className="text-[10px] text-emerald-700 font-semibold">
+            {isHi ? 'बिहार के सभी 38 ज़िलों के लिए विशेष रूप से समर्पित' : 'Dedicated exclusively for all 38 districts of Bihar'}
           </p>
         </div>
       </footer>

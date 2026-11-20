@@ -22,10 +22,12 @@ def seed_states(db: Session):
     path = os.path.join(SEEDS_DIR, "states.csv")
     if not os.path.exists(path):
         return
+    valid_ids = []
     with open(path, mode="r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             state_id = int(row["id"])
+            valid_ids.append(state_id)
             existing = db.query(State).filter(State.id == state_id).first()
             if not existing:
                 db.add(State(
@@ -33,6 +35,8 @@ def seed_states(db: Session):
                     name=row["name"],
                     country_code=row.get("country_code", "IN")
                 ))
+    if valid_ids:
+        db.query(State).filter(~State.id.in_(valid_ids)).delete(synchronize_session=False)
     db.commit()
     logger.info("States seeded successfully.")
 
@@ -40,10 +44,12 @@ def seed_districts(db: Session):
     path = os.path.join(SEEDS_DIR, "districts.csv")
     if not os.path.exists(path):
         return
+    valid_ids = []
     with open(path, mode="r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             dist_id = int(row["id"])
+            valid_ids.append(dist_id)
             existing = db.query(District).filter(District.id == dist_id).first()
             if not existing:
                 db.add(District(
@@ -54,6 +60,8 @@ def seed_districts(db: Session):
                     longitude=float(row["longitude"]),
                     administrative_code=row.get("administrative_code")
                 ))
+    if valid_ids:
+        db.query(District).filter(~District.id.in_(valid_ids)).delete(synchronize_session=False)
     db.commit()
     logger.info("Districts seeded successfully.")
 

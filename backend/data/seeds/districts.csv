@@ -37,9 +37,3 @@ id,state_id,name,latitude,longitude,administrative_code
 36,1,Supaul,26.1262,86.6053,BR-SU
 37,1,Vaishali,25.6858,85.2146,BR-VA
 38,1,West Champaran,27.1594,84.3551,BR-WC
-39,2,Varanasi,25.3176,82.9739,UP-VR
-40,2,Lucknow,26.8467,80.9462,UP-LK
-41,3,Ludhiana,30.9010,75.8573,PB-LD
-42,4,Bhopal,23.2599,77.4126,MP-BP
-43,5,Karnal,29.6857,76.9905,HR-KR
-44,6,Malda,25.0108,88.1411,WB-ML

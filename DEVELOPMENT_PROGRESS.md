@@ -2,6 +2,9 @@
 
 ## 1. Project Phase Completion Matrix
 
+- **Geographic Specialization**: Tailored exclusively to **Bihar (all 38 districts)** across Agro-Climatic Zone I, Zone II, and Zone III.
+- **Database Scope**: Standardized strictly on Bihar administrative boundaries, removing non-Bihar entries for optimal local farmer relevance.
+
 | Phase | Milestone | Deliverables | Status |
 |---|---|---|---|
 | **Phase 1** | Research & Architecture | API documentation review, architecture plan, schema normalization, data provenance tracking | **COMPLETED** |

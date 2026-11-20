@@ -2,8 +2,8 @@ export type Language = 'hi' | 'en';
 
 export const translations = {
   en: {
-    appName: "Smart Kisan",
-    tagline: "Right Crop. Right Season. Better Farming.",
+    appName: "Smart Kisan Bihar",
+    tagline: "Right Crop. Right Season. Better Farming in Bihar.",
     nav: {
       home: "Dashboard",
       weather: "Weather",
@@ -15,15 +15,15 @@ export const translations = {
       about: "About & Sources",
     },
     location: {
-      selectState: "Select State",
-      selectDistrict: "Select District",
-      searchPlaceholder: "Search district (e.g. Patna, Bhagalpur)...",
-      currentLocation: "Selected Location",
+      selectState: "Bihar",
+      selectDistrict: "Select Bihar District",
+      searchPlaceholder: "Search any of Bihar's 38 districts (e.g. Patna, Bhagalpur, Gaya)...",
+      currentLocation: "Selected District",
       disclaimer: "District centroid coordinates provide macro-level regional climate and soil estimates, not precise individual farm boundaries.",
     },
     dashboard: {
-      welcome: "Welcome, Kisan Brother!",
-      subheading: "Empowering your farm decisions with live weather, verified soil data, and ICAR agricultural intelligence.",
+      welcome: "Welcome to Smart Kisan Bihar!",
+      subheading: "Empowering Bihar farmers across all 38 districts with live weather, verified soil data, and ICAR-RCER Patna / BAU Sabour agricultural intelligence.",
       season: "Current Season",
       today: "Today",
       quickStats: "District Agro-Overview",
@@ -146,8 +146,8 @@ export const translations = {
     }
   },
   hi: {
-    appName: "स्मार्ट किसान",
-    tagline: "सही फसल। सही मौसम। बेहतर खेती।",
+    appName: "स्मार्ट किसान बिहार",
+    tagline: "सही फसल। सही मौसम। बिहार में बेहतर खेती।",
     nav: {
       home: "डैशबोर्ड",
       weather: "मौसम",
@@ -159,15 +159,15 @@ export const translations = {
       about: "परिचय व स्रोत",
     },
     location: {
-      selectState: "राज्य चुनें",
-      selectDistrict: "ज़िला चुनें",
-      searchPlaceholder: "ज़िला खोजें (जैसे: पटना, भागलपुर)...",
-      currentLocation: "चयनित स्थान",
+      selectState: "बिहार",
+      selectDistrict: "बिहार ज़िला चुनें (38 ज़िले)",
+      searchPlaceholder: "बिहार का कोई भी ज़िला खोजें (जैसे: पटना, गया, भागलपुर)...",
+      currentLocation: "चयनित ज़िला",
       disclaimer: "ज़िला स्तर के आंकड़े क्षेत्रीय कृषि-जलवायु अनुमान हैं, यह किसी एक व्यक्तिगत खेत की सटीक सीमा नहीं दर्शाते।",
     },
     dashboard: {
-      welcome: "नमस्ते, किसान भाई!",
-      subheading: "लाइव मौसम, सत्यापित मिट्टी परीक्षण और ICAR कृषि ज्ञान के साथ अपने खेत के लिए सही निर्णय लें।",
+      welcome: "स्मार्ट किसान बिहार में आपका स्वागत है!",
+      subheading: "बिहार के सभी 38 ज़िलों के लिए लाइव मौसम, सत्यापित मिट्टी परीक्षण और ICAR-RCER पटना / सबौर कृषि विश्वविद्यालय के ज्ञान के साथ समर्पित मंच।",
       season: "वर्तमान मौसम",
       today: "आज की तारीख",
       quickStats: "ज़िला कृषि अवलोकन",

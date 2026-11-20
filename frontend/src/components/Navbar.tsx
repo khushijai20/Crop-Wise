@@ -53,8 +53,8 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <span className="text-xl sm:text-2xl font-bold text-kisan-900 tracking-tight">
                   {t.appName}
                 </span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-kisan-100 text-kisan-800 font-semibold border border-kisan-200">
-                  v2.0 🌱
+                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold border border-emerald-200">
+                  {lang === 'hi' ? 'बिहार विशेष 🌱' : 'Bihar Edition 🌱'}
                 </span>
               </div>
               <p className="text-xs text-kisan-600 font-medium hidden sm:block">
@@ -69,11 +69,11 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={onOpenLocationModal}
               className="flex items-center space-x-1.5 px-3 py-1.5 rounded-full bg-kisan-50 hover:bg-kisan-100 border border-kisan-200 text-kisan-800 text-xs sm:text-sm font-medium transition shadow-sm"
-              title="Change District"
+              title="Change Bihar District"
             >
               <MapPin className="w-3.5 h-3.5 text-kisan-600" />
               <span className="font-semibold text-kisan-900">
-                {selectedDistrict ? selectedDistrict.name : 'Select District'}
+                {selectedDistrict ? `${selectedDistrict.name}, Bihar` : 'Select Bihar District'}
               </span>
               <span className="text-gray-400 text-[10px]">▼</span>
             </button>
