@@ -167,3 +167,61 @@ def test_multiple_districts_weather_and_soil():
         assert s_res.status_code == 200
         w_res = client.get(f"/api/v1/weather/{d_id}")
         assert w_res.status_code == 200
+
+def test_language_preferences_endpoint():
+    """Verify Bihar languages: Hindi, English, Bhojpuri, Maithili."""
+    # 1. Get supported languages
+    res = client.get("/api/v1/farmer/preferences")
+    assert res.status_code == 200
+    data = res.json()
+    codes = [l["code"] for l in data["supported_languages"]]
+    assert "hi" in codes
+    assert "en" in codes
+    assert "bho" in codes
+    assert "mai" in codes
+
+    # 2. Update preference to Bhojpuri
+    up_res = client.post("/api/v1/farmer/preferences", json={
+        "name": "Bhojpuri Kisan",
+        "preferred_language": "bho",
+        "district_id": 7 # Bhojpur
+    })
+    assert up_res.status_code == 200
+    assert up_res.json()["preferred_language"] == "bho"
+
+    # 3. Test Bhojpuri AI response
+    bho_req = {
+        "message": "गेहूं के बोआई कइसे करीं?",
+        "district_id": 7,
+        "language": "bho"
+    }
+    bho_chat = client.post("/api/v1/assistant/chat", json=bho_req)
+    assert bho_chat.status_code == 200
+    assert "भोजपुरी" in bho_chat.json()["answer"] or "गेहूं" in bho_chat.json()["answer"]
+
+def test_api_keys_management_and_status():
+    """Verify Groq, Gemini, and Weather App API key management."""
+    # 1. Fetch current status
+    res = client.get("/api/v1/api-keys/status")
+    assert res.status_code == 200
+    data = res.json()
+    assert "gemini" in data
+    assert "groq" in data
+    assert "weather" in data
+    assert "active_ai_provider" in data
+    assert "active_weather_provider" in data
+
+    # 2. Save test API keys
+    save_res = client.post("/api/v1/api-keys/save", json={
+        "gemini_api_key": "AIzaSyFakeTestGeminiKey12345678",
+        "groq_api_key": "gsk_FakeTestGroqKey1234567890",
+        "weather_api_key": "fake_weather_key_12345678901234"
+    })
+    assert save_res.status_code == 200
+    updated = save_res.json()
+    assert updated["gemini"]["is_configured"] is True
+    assert "AIza" in updated["gemini"]["masked_key"]
+    assert updated["groq"]["is_configured"] is True
+    assert "gsk_" in updated["groq"]["masked_key"]
+    assert updated["weather"]["is_configured"] is True
+
