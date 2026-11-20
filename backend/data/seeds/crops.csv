@@ -1,0 +1,20 @@
+id,name,scientific_name,category,description
+1,Rice (Paddy),Oryza sativa,Cereals,Staple kharif cereal crop of Bihar and Indo-Gangetic plains requiring high moisture and standing water.
+2,Wheat,Triticum aestivum,Cereals,Major rabi cereal crop in North India thriving in cool winters and fertile loamy soils.
+3,Maize,Zea mays,Cereals,Versatile cereal crop grown across Kharif Rabi and Zaid seasons in Bihar with high yield potential.
+4,Chickpea (Gram),Cicer arietinum,Pulses,Key rabi pulse crop fixing atmospheric nitrogen and suitable for medium to heavy soils with moderate moisture.
+5,Lentil (Masoor),Lens culinaris,Pulses,Cool-season rabi pulse widely cultivated in Bihar diara and tal regions after rice harvest.
+6,Arhar (Pigeon Pea),Cajanus cajan,Pulses,Long-duration deep-rooted pulse crop resilient to moisture stress and excellent for intercropping.
+7,Moong (Green Gram),Vigna radiata,Pulses,Short-duration pulse ideal for catch crop and soil enrichment in Zaid (summer) and Kharif.
+8,Urad (Black Gram),Vigna mungo,Pulses,Nutritious pulse crop suited for warm humid conditions and loamy soils in Kharif/Summer.
+9,Mustard,Brassica juncea,Oilseeds,Premier rabi oilseed crop of Bihar with high oil content and moderate water requirements.
+10,Rapeseed (Toria),Brassica rapa,Oilseeds,Short-duration rabi oilseed suitable as a preceding crop before late wheat in crop rotations.
+11,Groundnut,Arachis hypogaea,Oilseeds,Kharif and summer oilseed preferring well-drained sandy loam soil with moderate irrigation.
+12,Sugarcane,Saccharum officinarum,Cash and Other Crops,Major commercial cash crop in North Bihar supplying local sugar mills and requiring substantial irrigation.
+13,Potato,Solanum tuberosum,Cash and Other Crops,High-value rabi tuber crop extensively grown in Nalanda Patna and Samastipur plains.
+14,Onion,Allium cepa,Cash and Other Crops,Crucial commercial bulb crop cultivated in both Kharif and Rabi with high market demand.
+15,Tomato,Solanum lycopersicum,Vegetables,Warm and mild season vegetable grown extensively across Bihar fertile tracts.
+16,Brinjal (Eggplant),Solanum melongena,Vegetables,Hardy year-round vegetable crop with strong adaptation to varied Bihar soil types.
+17,Cauliflower,Brassica oleracea var. botrytis,Vegetables,Cool-season rabi vegetable widely produced around Patna Vaishali and Nalanda for winter markets.
+18,Cabbage,Brassica oleracea var. capitata,Vegetables,Cool-season leafy head vegetable responding well to organic matter and balanced moisture.
+19,Okra (Bhindi),Abelmoschus esculentus,Vegetables,Popular warm-season summer/kharif vegetable with fast picking turnaround and good returns.

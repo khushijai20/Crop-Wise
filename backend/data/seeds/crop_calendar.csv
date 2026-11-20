@@ -1,0 +1,31 @@
+id,crop_id,district_id,sowing_start_month,sowing_end_month,harvest_start_month,harvest_end_month,source,variety,verified_at
+1,1,26,6,7,10,11,BAU Sabour / ICAR-RCER Patna,Rajendra Sweta / MTU 7029,2026-05-15
+2,2,26,11,12,3,4,ICAR-IIWBR / BAU Sabour,HD 2967 / DBW 187 (Karan Vandana),2026-05-15
+3,3,26,10,11,3,4,ICAR-IIMR / BAU Sabour,Shaktiman 1 / Rajendra Makka,2026-05-15
+4,4,26,10,11,2,3,BAU Sabour / KVK Patna,Sabour Chana 1 / Pusa 256,2026-05-15
+5,5,26,10,11,2,3,BAU Sabour Pulses Project,HUL 57 / KLS 218,2026-05-15
+6,6,26,6,7,12,1,ICAR-IIPR Kanpur / BAU Sabour,Bahar / Narendra Arhar 1,2026-05-15
+7,7,26,3,4,5,6,BAU Sabour Zaid Package,Samrat / IPM 205-7 (Virat),2026-05-15
+8,8,26,7,8,10,11,ICAR-IIPR / BAU Sabour,Pant U 31 / Uttara,2026-05-15
+9,9,26,10,11,2,3,ICAR-DRMR / BAU Sabour,Rajendra Suflam / Pusa Bold,2026-05-15
+10,10,26,9,10,12,1,ICAR-DRMR Bharatpur,PT 303 / Panchali,2026-05-15
+11,11,26,6,7,10,11,ICAR-DGR Junagadh,Birsa Groundnut 2 / TAG 24,2026-05-15
+12,12,26,2,3,12,3,SRI Pusa / Sugar Mills Bihar,CoP 2061 / CoP 9301,2026-05-15
+13,13,26,10,11,1,2,ICAR-CPRI Shimla / Nalanda KVK,Kufri Pukhraj / Kufri Jyoti,2026-05-15
+14,14,26,11,12,4,5,ICAR-DOGR Rajgurunagar,Pusa Red / Agrifound Dark Red,2026-05-15
+15,15,26,9,10,12,3,ICAR-IIVR Varanasi,Pusa Rohini / Kashi Amrit,2026-05-15
+16,16,26,6,7,9,12,BAU Sabour Vegetable Div,Rajendra Baingan 2,2026-05-15
+17,17,26,9,10,12,2,ICAR-IIVR / BAU Sabour,Sabour Agrim / Pusa Snowball,2026-05-15
+18,18,26,9,10,12,2,ICAR-IIVR Varanasi,Golden Acre / Pride of India,2026-05-15
+19,19,26,2,3,4,6,ICAR-IIVR Varanasi,Arka Anamika / Parbhani Kranti,2026-05-15
+20,1,6,6,7,10,11,BAU Sabour Agro-advisory,Swarna Sub-1 / Rajendra Mansoori,2026-05-15
+21,2,6,11,12,3,4,BAU Sabour Wheat Package,Sabour Nirjal / PBW 343,2026-05-15
+22,9,6,10,11,2,3,BAU Sabour Oilseeds,Rajendra Suflam / Kranti,2026-05-15
+23,1,23,6,7,10,11,Dr. RPCAU Pusa / Muzaffarpur KVK,Rajendra Sweta / MTU 1010,2026-05-15
+24,2,23,11,12,3,4,Dr. RPCAU Pusa Wheat Division,HD 2967 / HI 1563,2026-05-15
+25,3,23,10,11,3,4,Dr. RPCAU Pusa Maize Research,Shaktiman 2 / Rajendra Makka,2026-05-15
+26,1,11,6,7,10,11,ICAR-RCER / Gaya KVK,Sahbhagi Dhan / MTU 1010,2026-05-15
+27,2,11,11,12,3,4,Gaya KVK Advisory,HD 2967 / K 0307,2026-05-15
+28,4,11,10,11,2,3,BAU Sabour Pulses / Gaya KVK,Sabour Chana 1 / Radhey,2026-05-15
+29,1,9,6,7,10,11,Darbhanga KVK Agro-climatic Zone II,Rajendra Kasturi / Sambha Sub-1,2026-05-15
+30,2,9,11,12,3,4,Darbhanga KVK Advisory,DBW 187 / PBW 343,2026-05-15

@@ -1,0 +1,39 @@
+id,district_id,soil_type,ph,nitrogen,organic_carbon,clay_percentage,sand_percentage,silt_percentage,source,data_resolution,verified_at
+1,1,Alluvial Acidic Loam,5.8,210.5,0.58,24.5,42.0,33.5,ICAR-RCER / Bihar Soil Survey,District-level aggregate,2026-04-10
+2,2,Old Alluvial Loam,7.1,235.0,0.48,28.0,36.0,36.0,Bihar State Soil Testing Lab,District-level aggregate,2026-04-10
+3,3,Sandy Clay Loam,6.8,215.0,0.42,31.0,41.0,28.0,ICAR-RCER / Bihar Soil Survey,District-level aggregate,2026-04-10
+4,4,Red & Yellow Loam,6.2,195.0,0.38,30.0,45.0,25.0,BAU Sabour Soil Science Dept,District-level aggregate,2026-04-10
+5,5,Calcareous Alluvial,7.8,260.0,0.62,26.0,35.0,39.0,Dr. RPCAU / Bihar SHC Portal,District-level aggregate,2026-04-10
+6,6,Alluvial Sandy Loam,7.2,245.0,0.55,25.0,44.0,31.0,BAU Sabour Soil Science Dept,District-level aggregate,2026-04-10
+7,7,Gangetic Alluvial,7.4,270.0,0.60,29.0,32.0,39.0,ICAR-RCER / Bihar Soil Survey,District-level aggregate,2026-04-10
+8,8,Heavy Clay (Kewal),7.5,265.0,0.58,38.0,24.0,38.0,Bihar State Soil Testing Lab,District-level aggregate,2026-04-10
+9,9,Calcareous Alluvial Silt,7.9,230.0,0.52,27.0,30.0,43.0,Dr. RPCAU Pusa Soil Lab,District-level aggregate,2026-04-10
+10,10,Recent Alluvial Silt Loam,7.3,250.0,0.64,23.0,38.0,39.0,Dr. RPCAU Pusa Soil Lab,District-level aggregate,2026-04-10
+11,11,Sandy Loam to Clay,6.9,220.0,0.46,29.0,43.0,28.0,ICAR-RCER / Gaya KVK,District-level aggregate,2026-04-10
+12,12,Calcareous Alluvial,8.1,240.0,0.56,25.0,34.0,41.0,Dr. RPCAU / Bihar SHC Portal,District-level aggregate,2026-04-10
+13,13,Red Gravelly Loam,6.3,185.0,0.36,33.0,46.0,21.0,BAU Sabour Soil Science Dept,District-level aggregate,2026-04-10
+14,14,Gangetic Alluvial Loam,7.2,240.0,0.50,28.0,37.0,35.0,Bihar State Soil Testing Lab,District-level aggregate,2026-04-10
+15,15,Clay Loam (Kewal),7.3,255.0,0.54,36.0,27.0,37.0,ICAR-RCER / Bihar Soil Survey,District-level aggregate,2026-04-10
+16,16,Acidic Alluvial Sandy Loam,5.9,205.0,0.51,21.0,48.0,31.0,BAU Sabour / Katihar KVK,District-level aggregate,2026-04-10
+17,17,Calcareous Alluvial Silt,7.6,235.0,0.53,26.0,34.0,40.0,BAU Sabour / Khagaria KVK,District-level aggregate,2026-04-10
+18,18,Terai Sandy Acid Loam,5.5,215.0,0.65,19.0,52.0,29.0,BAU Sabour / Kishanganj KVK,District-level aggregate,2026-04-10
+19,19,Old Alluvial Loam,7.1,230.0,0.47,27.0,39.0,34.0,Bihar State Soil Testing Lab,District-level aggregate,2026-04-10
+20,20,Sandy Silt Loam,6.7,215.0,0.49,22.0,46.0,32.0,Dr. RPCAU / Madhepura KVK,District-level aggregate,2026-04-10
+21,21,Calcareous Alluvial Clay,7.8,245.0,0.55,32.0,28.0,40.0,Dr. RPCAU / Madhubani KVK,District-level aggregate,2026-04-10
+22,22,Alluvial Sandy Loam,7.2,225.0,0.48,26.0,42.0,32.0,BAU Sabour / Munger KVK,District-level aggregate,2026-04-10
+23,23,Calcareous Silt Loam,8.0,250.0,0.61,25.0,33.0,42.0,Dr. RPCAU Pusa Soil Lab,District-level aggregate,2026-04-10
+24,24,Gangetic Alluvial Loam,7.4,285.0,0.68,28.0,35.0,37.0,ICAR-RCER / Nalanda KVK,District-level aggregate,2026-04-10
+25,25,Sandy Clay Loam,6.7,210.0,0.41,31.0,42.0,27.0,ICAR-RCER / Nawada KVK,District-level aggregate,2026-04-10
+26,26,Gangetic Silt Loam & Tal Clay,7.3,280.0,0.66,32.0,31.0,37.0,ICAR-RCER Patna Regional Lab,District-level aggregate,2026-04-10
+27,27,Alluvial Sandy Loam,6.4,225.0,0.58,22.0,49.0,29.0,BAU Sabour / Purnia KVK,District-level aggregate,2026-04-10
+28,28,Deep Alluvial Clay Loam,7.4,275.0,0.62,35.0,29.0,36.0,ICAR-RCER / Rohtas KVK,District-level aggregate,2026-04-10
+29,29,Recent Alluvial Silt,6.8,220.0,0.50,23.0,42.0,35.0,Dr. RPCAU / Saharsa KVK,District-level aggregate,2026-04-10
+30,30,Calcareous Alluvial Loam,7.9,265.0,0.63,27.0,32.0,41.0,Dr. RPCAU Pusa Soil Lab,District-level aggregate,2026-04-10
+31,31,Gangetic Alluvial Sandy Loam,7.5,240.0,0.52,24.0,41.0,35.0,Dr. RPCAU / Saran KVK,District-level aggregate,2026-04-10
+32,32,Old Alluvial Clay Loam,7.1,220.0,0.45,30.0,38.0,32.0,Bihar State Soil Testing Lab,District-level aggregate,2026-04-10
+33,33,Calcareous Silt Loam,7.7,235.0,0.57,24.0,36.0,40.0,Dr. RPCAU / Sheohar KVK,District-level aggregate,2026-04-10
+34,34,Recent Alluvial Sandy Loam,7.4,240.0,0.59,23.0,40.0,37.0,Dr. RPCAU / Sitamarhi KVK,District-level aggregate,2026-04-10
+35,35,Calcareous Silt Loam,8.0,245.0,0.54,26.0,33.0,41.0,Dr. RPCAU / Siwan KVK,District-level aggregate,2026-04-10
+36,36,Recent Alluvial Sand/Silt,6.6,210.0,0.48,20.0,51.0,29.0,Dr. RPCAU / Supaul KVK,District-level aggregate,2026-04-10
+37,37,Gangetic Alluvial Loam,7.6,270.0,0.65,26.0,36.0,38.0,Dr. RPCAU / Vaishali KVK,District-level aggregate,2026-04-10
+38,38,Tarai Sandy-Clay Loam,6.8,260.0,0.67,27.0,38.0,35.0,Dr. RPCAU / Bettiah KVK,District-level aggregate,2026-04-10
